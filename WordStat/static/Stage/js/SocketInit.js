@@ -55,21 +55,27 @@ Onloader.on(function() {
         host: 'wss://wordstat-server-classtype.c9.io',
         
     // Реквизиты для авторизации
-        access: ['7011111', 'my_password'],
+        access: ['701111', 'my_password'],
         
     // Реквизиты для инициализации
-        init: {
-            'war_id': 'war_id'// ID войны
-        },
+        init: ['war_id'],
         
     // Обработчик загрузки после инициализации
-        onload: function(success) {
-            this.send('getName', {id:1});
+        onload: function(id, name) {
+            this.console('ID: ' + id);
+            this.console('name: ' + name);
             this.console('Собственный текст в консоли!');
             this.console('Собственный текст в консоли!');
             this.console('Собственный текст в консоли!');
+            this.send('getName', 1, 'Вася');
         }
     });
+});
+
+Socket.on('setName', function(arg1, arg2, arg3) {
+    this.console('arg1: ' + arg1);
+    this.console('arg2: ' + arg2);
+    this.console('arg3: ' + arg3);
 });
 
 //--------------------------------------------------------------------------------------------------
